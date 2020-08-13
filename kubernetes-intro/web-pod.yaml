@@ -1,0 +1,29 @@
+kind: Pod
+apiVersion: v1
+
+metadata:
+  name: web
+  labels:
+    app: web
+
+spec:
+  initContainers:
+    - name: create-index-html
+      image: busybox
+      volumeMounts:
+        - name: app
+          mountPath: /app
+      command: ['sh', '-c', 'wget -O- https://tinyurl.com/otus-k8s-intro | sh']
+  containers:
+    - name: web
+      image: opcode/otus-kubernetes-intro:1.0
+      imagePullPolicy: Always
+      ports:
+        - name: http
+          containerPort: 8000
+      volumeMounts:
+        - name: app
+          mountPath: /app
+  volumes:
+    - name: app
+      emptyDir: {}
