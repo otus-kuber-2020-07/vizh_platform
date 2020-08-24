@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: opcode/hipster-frontend:v.0.0.2
+          image: opcode/hipster-frontend:v.0.0.1
           env:
             - name: PRODUCT_CATALOG_SERVICE_ADDR
               value: "productcatalogservice:3550"
@@ -34,6 +34,8 @@ spec:
               value: "shippingservice:50051"
             - name: AD_SERVICE_ADDR
               value: "adservice:9555"
+          ports:
+            - containerPort: 8080
           readinessProbe:
             initialDelaySeconds: 10
             httpGet:
