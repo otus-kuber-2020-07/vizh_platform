@@ -1,0 +1,51 @@
+kind: Namespace
+apiVersion: v1
+
+metadata:
+  name: prometheus
+
+---
+
+kind: ServiceAccount
+apiVersion: v1
+
+metadata:
+  name: carol
+  namespace: prometheus
+
+---
+
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+
+metadata:
+  name: prometheus-role
+  namespace: prometheus
+
+rules:
+  - apiGroups: [""]
+    verbs:
+      - get
+      - list
+      - watch
+    resources:
+      - Pods
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+
+metadata:
+  name: prometheus
+  namespace: prometheus
+
+subjects:
+  - kind: Group
+    namespace: prometheus
+    name: "system:serviceaccounts"
+
+roleRef:
+  apiGroup: ""
+  kind: ClusterRole
+  name: prometheus-role
