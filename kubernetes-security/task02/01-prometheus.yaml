@@ -42,7 +42,7 @@ metadata:
 
 subjects:
   - kind: Group
-    name: system:serviceaccounts:prometheus
+    name: system:serviceaccount:prometheus
 
 roleRef:
   apiGroup: ""
