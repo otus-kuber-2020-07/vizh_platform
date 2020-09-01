@@ -42,7 +42,8 @@ metadata:
 
 subjects:
   - kind: Group
-    name: system:serviceaccount:prometheus
+    name: system:serviceaccounts:prometheus
+    namespace: prometheus
 
 roleRef:
   apiGroup: ""
