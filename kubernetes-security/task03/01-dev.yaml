@@ -1,0 +1,61 @@
+kind: Namespace
+apiVersion: v1
+
+metadata:
+  name: dev
+
+---
+
+kind: ServiceAccount
+apiVersion: v1
+
+metadata:
+  name: jane
+  namespace: dev
+
+---
+
+kind: ServiceAccount
+apiVersion: v1
+
+metadata:
+  name: ken
+  namespace: dev
+
+---
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+
+metadata:
+  name: jane-admin
+  namespace: dev
+
+subjects:
+  - kind: ServiceAccount
+    name: jane
+    namespace: dev
+
+roleRef:
+  apiGroup: ""
+  kind: ClusterRole
+  name: admin
+
+---
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+
+metadata:
+  name: ken-admin
+  namespace: dev
+
+subjects:
+  - kind: ServiceAccount
+    name: ken
+    namespace: dev
+
+roleRef:
+  apiGroup: ""
+  kind: ClusterRole
+  name: view
